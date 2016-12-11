@@ -1,10 +1,14 @@
+[![Build Status](https://travis-ci.org/orcasgit/django-ajax-uploader.svg?branch=master)](https://travis-ci.org/orcasgit/django-ajax-uploader) [![Coverage Status](https://coveralls.io/repos/github/orcasgit/django-ajax-uploader/badge.svg?branch=master)](https://coveralls.io/github/orcasgit/django-ajax-uploader?branch=master)
+
 `django-ajax-uploader` provides a useful class you can use to easily implement ajax uploads.
 
 It uses valum's great uploader: https://github.com/valums/file-uploader, and draws heavy inspiration and some code from https://github.com/alexkuhl/file-uploader.
 
-You can also use [fineuploader](http://fineuploader.com/), the commercial/open source project that sprung out of valum's original work. It's great, and highly recommended. 
+You can also use [fineuploader](http://fineuploader.com/), the commercial/open source project that sprung out of valum's original work. It's great, and highly recommended.
 
 In short, it implements a callable class, `AjaxFileUploader` that you can use to handle uploads. By default, `AjaxFileUploader` assumes you want to upload to local storage, but you can select any other backend if desired or write your own (see backends section below). Pull requests welcome!
+
+Supports Django 1.8, 1.9, and 1.10.
 
 Updates
 =======
@@ -27,13 +31,13 @@ You have two basic ways to set up django-ajax-uploader.
 Usage (standard, non-direct to s3 backends)
 ===========================================
 
-Step 1. Install django-ajax-uploader. 
+Step 1. Install django-ajax-uploader.
 -------------------------------------
 It's in pypi now, so simply:
 
 - `pip install ajaxuploader`
 
-You may also need to install backend-specific dependences. 
+You may also need to install backend-specific dependences.
 
  - For the S3 backend or direct S3 uploads, you will need [boto](https://github.com/boto/boto).  ( `pip install boto` )
  - For the MongoDB GridFS backend, you will need [pymongo](https://github.com/AloneRoad/pymongo) ( `pip install pymongo` )
@@ -75,9 +79,9 @@ def start(request):
         {'csrf_token': csrf_token}, context_instance = RequestContext(request))
 
 import_uploader = AjaxFileUploader()
-``` 
+```
 
-urls.py 
+urls.py
 
 ```
 url(r'start$', views.start, name="start"),
@@ -133,7 +137,7 @@ This sample is included in the templates directory, but at the minimum, you need
 
 
  If you want to use the latest version of [Fine Uploader](http://fineuploader.com/), as valum's `file-uploader` is now called, instead of the one bundled with `django-ajax-uploader`, you can do so by replacing the params arguments in the above template with the following customHeaders:
- 
+
  ```javascript
                  ...
                  customHeaders: {
@@ -141,12 +145,12 @@ This sample is included in the templates directory, but at the minimum, you need
                  },
                  ...
  ```
- 
+
 
 Usage (Direct to S3 uploads)
 ===========================================
 
-Step 1. Install django-ajax-uploader and dependencies. 
+Step 1. Install django-ajax-uploader and dependencies.
 ------------------------------------------------------
 
 - `pip install ajaxuploader boto`
@@ -170,7 +174,7 @@ INSTALLED_APPS = (
 )
 ```
 
-Also in settings, add the following: 
+Also in settings, add the following:
 
 ```python
 AWS_UPLOAD_BUCKET_NAME = "bucket-to-upload-to"
@@ -226,8 +230,8 @@ var uploader = new qq.s3.FineUploader({
 Backends
 ========
 
-`django-ajax-uploader` can put the uploaded files into a number of places, and perform actions on the files uploaded. Currently, 
-there are backends available for local storage (default), Amazon S3, MongoDB (GridFS), CouchDB, and a locally stored image 
+`django-ajax-uploader` can put the uploaded files into a number of places, and perform actions on the files uploaded. Currently,
+there are backends available for local storage (default), Amazon S3, MongoDB (GridFS), CouchDB, and a locally stored image
 thumbnail backend. Creating a custom backend is fairly straightforward, and pull requests are welcome.
 
 Built-in Backends
@@ -359,7 +363,7 @@ Settings:
 
 * `DIMENSIONS` : A tuple of the dimensions (WxH) to resize the uploaded image to. Defaults to "100x100"
 * `KEEP_ORIGINAL`: Whether to keep the originally uploaded file. Defaults to False.
-* `CROP`: Whether to create a 'cropped' version of the thumbnail. Defaults to True. 
+* `CROP`: Whether to create a 'cropped' version of the thumbnail. Defaults to True.
 * `BUFFER_SIZE`: The size of each chunk to write. Defaults to 10 MB.
 
 Context returned:
@@ -392,7 +396,7 @@ Example Usage:
 from ajaxuploader.views import AjaxFileUploader
 from ajaxuploader.backends.easythumbnails import EasyThumbnailUploadBackend
 
-import_uploader = AjaxFileUploader(UPLOAD_DIR='my_upload', backend=EasyThumbnailUploadBackend, DIMENSIONS=(250, 250)) 
+import_uploader = AjaxFileUploader(UPLOAD_DIR='my_upload', backend=EasyThumbnailUploadBackend, DIMENSIONS=(250, 250))
 ```
 
 
@@ -527,7 +531,7 @@ Past Release History / API Changes
 
 Version 0.3.5 is released, with the following backward incompababile changes:
 
-* The EasyThumbnail backend now lives in `easythumbnails.py`, instead of `easy_thumbnails.py`. 
+* The EasyThumbnail backend now lives in `easythumbnails.py`, instead of `easy_thumbnails.py`.
 
 
 Version 0.2.1 is released, and contains:
@@ -536,10 +540,10 @@ Version 0.2.1 is released, and contains:
 
 
 Version 0.2 is released, and contains:
-    
+
 * Optional `fileLimit` param for the uploader, to limit the number of allowed files. (Thanks to qnub)
 * fhahn's `default_storage` backend.
- 
+
 
 Version 0.1.1 is released, and contains:
 

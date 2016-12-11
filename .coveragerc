@@ -1,0 +1,3 @@
+[run]
+branch = True
+omit = .tox/**,run_tests.py,ajaxuploader/tests/**

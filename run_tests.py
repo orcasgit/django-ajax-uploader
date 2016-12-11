@@ -1,4 +1,7 @@
+#!/usr/bin/env python
 # from https://github.com/django-extensions/django-extensions/blob/master/run_tests.py
+
+import django
 
 from django.conf import settings
 from django.core.management import call_command
@@ -23,14 +26,16 @@ def main():
         },
         MEDIA_ROOT = '/tmp/ajaxuploader_test_media/',
         MEDIA_PATH = '/media/',
-        ROOT_URLCONF = 'ajaxuploader.urls',
+        ROOT_URLCONF = 'ajaxuploader.tests.urls',
         DEBUG = True,
         TEMPLATE_DEBUG = True
     )
-    
+
+    getattr(django, 'setup', lambda: None)()
+
     # Fire off the tests
     call_command('test', 'ajaxuploader')
-    
+
 
 if __name__ == '__main__':
     main()

@@ -9,11 +9,11 @@ from django.core.urlresolvers import reverse
 
 
 class AjaxUploadTest(TestCase):
-    urls = 'ajaxuploader.tests.urls'
-
     def setUp(self):
         super(AjaxUploadTest, self).setUp()
-        
+
+        os.makedirs(os.path.join(settings.MEDIA_ROOT, 'uploads/tests'))
+
         self.test_dir = os.path.dirname(__file__)
         test_file = open(os.path.join(self.test_dir, '../fixtures/pony.png'),
                          'rb')
@@ -26,12 +26,12 @@ class AjaxUploadTest(TestCase):
 
         # reset position to beginning of the file
         self.test_file_1.seek(0)
-        
-        
+
+
     def tearDown(self):
         # remove created uploads/tests directory
         rmtree(os.path.join(settings.MEDIA_ROOT, 'uploads/tests'))
-        
+
     def test_upload_raw_post_local_backend(self):
         """
         tests uploading a file to DefaultStorageUploadBackend
