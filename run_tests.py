@@ -15,6 +15,8 @@ def main():
             'django.contrib.contenttypes',
             'django.contrib.admin',
             'django.contrib.sessions',
+            'easy_thumbnails',
+            'sorl.thumbnail',
             'ajaxuploader',
         ),
         # Django replaces this, but it still wants it. *shrugs*
