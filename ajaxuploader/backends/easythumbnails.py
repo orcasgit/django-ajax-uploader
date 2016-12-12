@@ -11,7 +11,7 @@ class EasyThumbnailUploadBackend(LocalUploadBackend):
     CROP = True
     KEEP_ORIGINAL = False
 
-    def upload_complete(self, request, filename):
+    def upload_complete(self, request, filename, *args, **kwargs):
 
         options = {'size': self.DIMENSIONS, 'crop': self.CROP}
         thumb = get_thumbnailer(self._path).get_thumbnail(options)
